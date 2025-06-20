@@ -1,0 +1,90 @@
+<!-- MODERN FİLTRE BAR -->
+<div class="filter-bar">
+  <div class="filter-group">
+    <label for="categoryInput">Kategori:</label>
+    <input id="categoryInput" type="text" [(ngModel)]="categoryFilter" placeholder="Kategori yaz...">
+  </div>
+  <div class="filter-group">
+    <label for="prioritySelect">Öncelik:</label>
+    <select id="prioritySelect" [(ngModel)]="priorityFilter">
+      <option value="all">Hepsi</option>
+      <option value="Yüksek">Yüksek</option>
+      <option value="Orta">Orta</option>
+      <option value="Düşük">Düşük</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <button 
+      [class.active]="sortOrder === 'asc'" 
+      (click)="setSortOrder('asc')">En Eski</button>
+    <button 
+      [class.active]="sortOrder === 'desc'" 
+      (click)="setSortOrder('desc')">En Yeni</button>
+  </div>
+  <div class="filter-group">
+    <label for="completedSelect">Durum:</label>
+    <select id="completedSelect" [(ngModel)]="completedFilter">
+      <option value="all">Hepsi</option>
+      <option value="completed">Tamamlananlar</option>
+      <option value="uncompleted">Tamamlanmayanlar</option>
+    </select>
+  </div>
+  <button class="clear-filters" (click)="clearFilters()" type="button">Filtreleri Temizle</button>
+</div>
+
+<!-- GÖREV KARTLARI (Tek sütun, üstten alta) -->
+<div class="task-list-column">
+  <div 
+    *ngFor="let task of sortedTasks"
+    [ngClass]="[getPriorityClass(task.priority), getCategoryClass(task.category)]"
+    [ngStyle]="{
+      'padding': '12px',
+      'border-radius': '10px',
+      'box-shadow': '0 2px 8px #e0e0e0',
+      'background': '#fff',
+      'position': 'relative',
+      'opacity': task.completed ? '0.7' : '1',
+      'marginBottom': '16px'
+    }"
+  >
+
+    <!-- GÖREV BAŞLIĞI ve TİK -->
+    <div style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+      <span style="font-weight: bold; font-size: 17px;">{{ task.title }}</span>
+      
+      <!-- Görünmeyen Checkbox (sadece tik görünecek) -->
+      <input 
+        type="checkbox" 
+        [(ngModel)]="task.completed" 
+        (change)="toggleCompleted(task)"
+        style="opacity: 0; width: 28px; height: 28px; margin: 0; position: absolute; right: 0px; top: 0px; z-index:10; cursor:pointer;"
+        title="Tamamlandı mı?"
+      />
+      <!-- Sadece tik görünecek -->
+      <span 
+        *ngIf="task.completed" 
+        class="checkmark-inside"
+        style="pointer-events:none; right: 0px; top: 0px; position: absolute;"
+      >✔️</span>
+    </div>
+
+    <div *ngIf="task.description" style="margin-top: 5px; color: #757575; font-size: 14px;">
+      {{ task.description }}
+    </div>
+    <div style="margin-top: 8px; font-size: 14px;">
+      <span><strong>Kategori:</strong> {{ task.category }}</span><br>
+      <span><strong>Öncelik:</strong> {{ task.priority }}</span><br>
+      <span><strong>Tarih:</strong> {{ task.dueDate }}</span>
+    </div>
+    <button (click)="editTask(task)" style="margin-top: 10px;">Düzenle</button>
+
+    <!-- SİLME MODU: -->
+    <ng-container *ngIf="deleteConfirmId === task.id; else silButonu">
+      <button (click)="deleteTask(task)" style="margin-top: 10px; margin-left: 5px; background: #f44336; color: white; border: none; border-radius: 4px; padding: 4px 10px;">Evet</button>
+      <button (click)="cancelDelete()" style="margin-top: 10px; margin-left: 5px; background: #bdbdbd; color: white; border: none; border-radius: 4px; padding: 4px 10px;">Hayır</button>
+    </ng-container>
+    <ng-template #silButonu>
+      <button (click)="showDeleteConfirm(task)" style="margin-top: 10px; margin-left: 5px; background: #f44336; color: white; border: none; border-radius: 4px; padding: 4px 10px;">Sil</button>
+    </ng-template>
+  </div>
+</div>

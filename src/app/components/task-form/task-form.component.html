@@ -1,0 +1,35 @@
+<h2 style="margin-bottom: 24px;">Görev Ekle / Güncelle</h2>
+<form (ngSubmit)="addTask()" #taskForm="ngForm" class="task-form">
+  <label>
+    Başlık*:
+    <input type="text" [(ngModel)]="task.title" name="title" required>
+  </label>
+  <label>
+    Açıklama:
+    <input type="text" [(ngModel)]="task.description" name="description">
+  </label>
+  <label>
+    Kategori*:
+    <input type="text" [(ngModel)]="task.category" name="category" required>
+  </label>
+  <label>
+    Öncelik:
+    <select [(ngModel)]="task.priority" name="priority">
+      <option value="Yüksek">Yüksek</option>
+      <option value="Orta">Orta</option>
+      <option value="Düşük">Düşük</option>
+    </select>
+  </label>
+  <label>
+    Tarih*:
+    <input type="date" [(ngModel)]="task.dueDate" name="dueDate" required>
+  </label>
+  <label class="checkbox-label">
+    Tamamlandı mı?
+    <input type="checkbox" [(ngModel)]="task.completed" name="completed">
+  </label>
+  <!-- Ekle ya da güncelle butonları -->
+  <button type="submit" *ngIf="!task.id">Görev Ekle</button>
+  <button type="submit" *ngIf="task.id">Görevi Güncelle</button>
+  <button type="button" *ngIf="task.id" (click)="cancelEdit()" style="margin-left:10px;">İptal</button>
+</form>
