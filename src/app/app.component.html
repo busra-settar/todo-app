@@ -1,0 +1,21 @@
+<div class="app-header">
+  <h1>Görev Takip Uygulaması</h1>
+  <div class="subtitle">Yapılacaklarını kolayca planla ve tamamla!</div>
+</div>
+
+<div class="main-layout">
+  <div class="left-column">
+    <app-task-form
+      [editTaskObj]="editTaskObj"
+      (taskAdded)="onTaskAdded($event)"
+      (taskUpdated)="onTaskUpdated($event)"
+    ></app-task-form>
+  </div>
+  <div class="right-column">
+    <app-task-list
+      [tasks]="tasks"
+      (editTaskEvent)="onEditTask($event)"
+      (deleteTaskEvent)="deleteTask($event)"
+    ></app-task-list>
+  </div>
+</div>

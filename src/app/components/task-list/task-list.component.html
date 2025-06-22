@@ -1,0 +1,116 @@
+<!-- FİLTRE BAR -->
+<div class="filter-bar-advanced">
+  <div class="filter-row">
+    <!-- Kategori -->
+    <div class="filter-group">
+      <label for="categoryFilterSelect">Kategori:</label>
+      <select id="categoryFilterSelect" [(ngModel)]="categoryFilter">
+        <option value="all">Hepsi</option>
+        <option value="İş">İş</option>
+        <option value="Kişisel">Kişisel</option>
+        <option value="Okul">Okul</option>
+        <option value="Ev">Ev</option>
+        <option value="Diğer">Diğer</option>
+      </select>
+    </div>
+    <!-- Durum -->
+    <div class="filter-group">
+      <label for="completedSelect">Durum:</label>
+      <select id="completedSelect" [(ngModel)]="completedFilter">
+        <option value="all">Hepsi</option>
+        <option value="completed">Tamamlananlar</option>
+        <option value="uncompleted">Tamamlanmayanlar</option>
+      </select>
+    </div>
+    <!-- Sıralama -->
+    <div class="sort-btn-group">
+      <button [class.active]="sortOrder === 'asc'" (click)="setSortOrder('asc')">En Eski</button>
+      <button [class.active]="sortOrder === 'desc'" (click)="setSortOrder('desc')">En Yeni</button>
+    </div>
+  </div>
+  <div class="priority-row">
+    <label>Öncelik:</label>
+    <div class="priority-btns">
+      <button
+        type="button"
+        class="priority-btn"
+        [class.selected]="priorityFilter === 'all'"
+        (click)="setPriorityFilter('all')"
+      >Hepsi</button>
+      <button
+        type="button"
+        class="priority-btn priority-low"
+        [class.selected]="priorityFilter === 'Düşük'"
+        (click)="setPriorityFilter('Düşük')"
+      >Düşük</button>
+      <button
+        type="button"
+        class="priority-btn priority-medium"
+        [class.selected]="priorityFilter === 'Orta'"
+        (click)="setPriorityFilter('Orta')"
+      >Orta</button>
+      <button
+        type="button"
+        class="priority-btn priority-high"
+        [class.selected]="priorityFilter === 'Yüksek'"
+        (click)="setPriorityFilter('Yüksek')"
+      >Yüksek</button>
+    </div>
+    <!-- Temizle sağ alt köşe -->
+    <button class="clear-filters" (click)="clearFilters()" type="button">
+      Filtreleri Temizle
+    </button>
+  </div>
+</div>
+
+<!-- GÖREV LİSTESİ -->
+<div class="task-list-column">
+  <div
+    *ngFor="let task of sortedTasks"
+    class="task-card"
+    [ngClass]="[getPriorityClass(task.priority), getCategoryClass(task.category)]"
+    [ngStyle]="{
+      'opacity': task.completed ? '0.7' : '1'
+    }"
+  >
+    <!-- Sağ üstte tik -->
+    <span *ngIf="task.completed" class="checkmark-inside">✔️</span>
+    <!-- Başlık -->
+    <div class="task-title">{{ task.title }}</div>
+    <!-- Açıklama -->
+    <div class="task-desc" *ngIf="task.description">{{ task.description }}</div>
+    <!-- Bilgiler -->
+    <div class="task-info">
+      <span class="task-label"><b>Kategori:</b>
+        <span class="category-value">{{ task.category }}</span>
+      </span>
+      <br />
+      <span class="task-label"><b>Öncelik:</b>
+        <span
+          class="priority-chip"
+          [ngClass]="{
+            'chip-high': task.priority === 'Yüksek',
+            'chip-medium': task.priority === 'Orta',
+            'chip-low': task.priority === 'Düşük'
+          }"
+        >{{ task.priority }}</span>
+      </span>
+      <br />
+      <span class="task-label"><b>Tarih:</b>
+        <span class="date-value">{{ task.dueDate }}</span>
+      </span>
+    </div>
+    <!-- Butonlar -->
+    <div class="task-actions">
+      <button (click)="editTask(task)" class="edit-btn">Düzenle</button>
+      <ng-container *ngIf="deleteConfirmId === task.id; else silButonu">
+	<span class="confirm-text">Emin misiniz?</span>
+        <button (click)="deleteTask(task)" class="delete-btn">Evet</button>
+        <button (click)="cancelDelete()" class="cancel-btn">Hayır</button>
+      </ng-container>
+      <ng-template #silButonu>
+        <button (click)="showDeleteConfirm(task)" class="delete-btn">Sil</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

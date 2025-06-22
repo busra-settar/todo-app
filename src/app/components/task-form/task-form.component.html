@@ -1,0 +1,78 @@
+<h2 style="margin-bottom: 24px;">Görev Ekle / Güncelle</h2>
+<form (ngSubmit)="addTask()" #taskForm="ngForm" class="task-form">
+  <label>
+    Başlık*:
+    <input type="text" [(ngModel)]="task.title" name="title" required>
+  </label>
+  <label>
+    Açıklama:
+    <textarea [(ngModel)]="task.description" name="description" rows="2"></textarea>
+  </label>
+  <label>
+    Kategori*:
+    <select [(ngModel)]="task.category" name="category" required>
+      <option value="" disabled selected>Kategori seçiniz</option>
+      <option value="İş">İş</option>
+      <option value="Kişisel">Kişisel</option>
+      <option value="Okul">Okul</option>
+      <option value="Ev">Ev</option>
+      <option value="Diğer">Diğer</option>
+    </select>
+  </label>
+  <label style="display:flex; flex-direction:column;">
+    Öncelik*:
+    <div style="display:flex; gap:10px; margin-top:6px;">
+      <button 
+        type="button"
+        class="priority-btn"
+        [ngStyle]="{
+          'background': task.priority === 'Yüksek' ? '#d32f2f' : '#fff',
+          'color': task.priority === 'Yüksek' ? '#fff' : '#d32f2f',
+          'border': '2px solid #d32f2f'
+        }"
+        [class.selected]="task.priority === 'Yüksek'"
+        (click)="setPriority('Yüksek')"
+      >Yüksek</button>
+      <button 
+        type="button"
+        class="priority-btn"
+        [ngStyle]="{
+          'background': task.priority === 'Orta' ? '#ff9800' : '#fff',
+          'color': task.priority === 'Orta' ? '#fff' : '#ff9800',
+          'border': '2px solid #ff9800'
+        }"
+        [class.selected]="task.priority === 'Orta'"
+        (click)="setPriority('Orta')"
+      >Orta</button>
+      <button 
+        type="button"
+        class="priority-btn"
+        [ngStyle]="{
+          'background': task.priority === 'Düşük' ? '#388e3c' : '#fff',
+          'color': task.priority === 'Düşük' ? '#fff' : '#388e3c',
+          'border': '2px solid #388e3c'
+        }"
+        [class.selected]="task.priority === 'Düşük'"
+        (click)="setPriority('Düşük')"
+      >Düşük</button>
+    </div>
+  </label>
+  <label>
+    Tarih*:
+    <input 
+      type="date" 
+      [(ngModel)]="task.dueDate" 
+      name="dueDate" 
+      required
+      min="1900-01-01"
+      max="2100-12-31"
+    />
+  </label>
+  <label class="checkbox-label">
+    Tamamlandı mı?
+    <input type="checkbox" [(ngModel)]="task.completed" name="completed">
+  </label>
+  <button type="submit" *ngIf="!task.id">Görev Ekle</button>
+  <button type="submit" *ngIf="task.id">Görevi Güncelle</button>
+  <button type="button" *ngIf="task.id" (click)="cancelEdit()" style="margin-left:10px;">İptal</button>
+</form>

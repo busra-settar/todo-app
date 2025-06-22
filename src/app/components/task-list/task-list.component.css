@@ -1,0 +1,347 @@
+body, html {
+  background: #f7fafc !important;
+}
+
+/* FİLTRE BAR TASARIMI */
+.filter-bar-advanced {
+  background: #f7fafd;
+  border-radius: 14px;
+  box-shadow: 0 1px 7px #e2eaf2;
+  border: 1px solid #e1eaf1;
+  padding: 22px 28px 22px 28px;
+  margin-bottom: 24px;
+  min-width: 340px;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 150px;
+}
+
+.filter-group label {
+  font-weight: 500;
+  color: #2471a3;
+  font-size: 15px;
+  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+}
+
+.filter-group select {
+  padding: 8px 12px;
+  border: 1.5px solid #c7d1e5;
+  border-radius: 7px;
+  font-size: 15px;
+  background: #fafdff;
+  outline: none;
+  transition: border 0.18s;
+}
+
+.filter-group select:focus {
+  border: 1.7px solid #1976d2;
+}
+
+.sort-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sort-btn-group button {
+  min-width: 80px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: none;
+  background: #e3eaf7;
+  color: #1864a5;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.sort-btn-group button.active,
+.sort-btn-group button:hover {
+  background: #1976d2;
+  color: white;
+}
+
+.priority-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  margin-top: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.priority-row label {
+  color: #2471a3;
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 9px;
+}
+
+.priority-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.priority-btn {
+  padding: 8px 18px;
+  border-radius: 7px;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #fff;
+  color: #616161;
+  box-shadow: 0 1px 3px #ececec;
+  transition: background 0.17s, color 0.17s, box-shadow 0.17s;
+  outline: none;
+  border: 1.2px solid #e1eaf1;
+}
+.priority-btn.selected {
+  box-shadow: 0 2px 8px #e0e0e0;
+  font-weight: bold;
+  background: #e3f2fd;
+  color: #1976d2;
+  border: 1.5px solid #1976d2;
+}
+.priority-btn.priority-high.selected {
+  background: #d32f2f;
+  color: #fff;
+  border-color: #d32f2f;
+}
+.priority-btn.priority-medium.selected {
+  background: #ff9800;
+  color: #fff;
+  border-color: #ff9800;
+}
+.priority-btn.priority-low.selected {
+  background: #388e3c;
+  color: #fff;
+  border-color: #388e3c;
+}
+
+/* Filtreleri Temizle butonu artık priority-row'da ve sağa hizalı */
+.clear-filters {
+  background: #eceff1;
+  color: #37474f;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 7px;
+  font-size: 15px;
+  height: 39px;
+  margin-left: auto;    /* Satırın sağına it */
+  box-shadow: 0 1px 3px #ececec;
+  transition: background 0.18s, color 0.18s;
+  cursor: pointer;
+}
+.clear-filters:hover {
+  background: #1976d2;
+  color: white;
+}
+
+/* GÖREV LİSTESİ (Kartlar) */
+.task-list-column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.task-card {
+  width: 100%;
+  max-width: 490px;
+  min-width: 240px;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 10px #e3e9f2;
+  border: 1px solid #e3e8ee;
+  transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
+  border-left: 6px solid #90caf9;
+  padding: 20px 24px 16px 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.task-card:hover {
+  box-shadow: 0 8px 32px #e1e7ee, 0 2px 6px #e2e2e2;
+  border-left: 6px solid #42a5f5;
+  transform: translateY(-2px) scale(1.011);
+}
+
+/* Kartta sağ üst tik */
+.checkmark-inside {
+  position: absolute;
+  top: 19px;
+  right: 25px;
+  font-size: 28px;
+  color: #9575cd;
+  background: #f3eafe;
+  border-radius: 50%;
+  padding: 4px 8px;
+  z-index: 2;
+  box-shadow: 0 1px 3px #ebe2fc;
+}
+
+/* Başlık ve açıklama */
+.task-title {
+  color: #1976d2;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  letter-spacing: 0.04em;
+}
+
+.task-desc {
+  color: #757575;
+  font-size: 15px;
+  margin-bottom: 2px;
+  word-break: break-word;
+}
+
+/* Bilgi satırları */
+.task-info {
+  font-size: 15px;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+.task-label {
+  color: #333;
+  font-weight: 600;
+}
+
+.category-value {
+  color: #b28800;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.date-value {
+  color: #e67e22;
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+/* Öncelik rozetleri */
+.priority-chip {
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 2px 14px;
+  margin-left: 2px;
+  font-size: 15px;
+  display: inline-block;
+}
+
+.chip-high {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.chip-medium {
+  background: #ff9800;
+  color: #fff;
+}
+
+.chip-low {
+  background: #388e3c;
+  color: #fff;
+}
+
+/* Butonlar */
+.task-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 7px;
+}
+
+.edit-btn {
+  background: #fff;
+  color: #313131;
+  border: 1.3px solid #aab4be;
+  border-radius: 6px;
+  padding: 5px 15px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border 0.15s;
+}
+
+.edit-btn:hover {
+  background: #1976d2;
+  color: #fff;
+  border: 1.3px solid #1976d2;
+}
+
+.delete-btn {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+.cancel-btn {
+  background: #bdbdbd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.13s;
+}
+
+.cancel-btn:hover {
+  background: #757575;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .filter-bar-advanced {
+    padding: 12px 7px 18px 7px;
+  }
+  .filter-row {
+    flex-direction: column;
+    gap: 11px;
+    margin-bottom: 10px;
+  }
+  .priority-row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .clear-filters {
+    margin-left: 0;
+    width: 100%;
+  }
+  .task-card {
+    max-width: 100% !important;
+    padding: 12px 7px 12px 12px;
+  }
+}
